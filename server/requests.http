@@ -1,0 +1,14 @@
+### Get all transactions
+GET http://localhost:5000/transactions
+
+###
+
+### Create a transaction
+POST http://localhost:5000/transactions
+Content-Type: application/json
+
+{
+  "product": "Bread",
+  "quantity": 2,
+  "price": 800
+}
