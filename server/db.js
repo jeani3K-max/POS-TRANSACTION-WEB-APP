@@ -19,7 +19,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
         quantity INTEGER NOT NULL,
         price REAL NOT NULL,
         total REAL NOT NULL,
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `);
   }

@@ -1,124 +1,208 @@
 import { useEffect, useState } from "react";
+import DashboardCards from "./components/DashboardCards";
+import SearchBar from "./components/SearchBar";
+import TransactionForm from "./components/TransactionForm";
+import TransactionTable from "./components/TransactionTable";
+
+import {
+  getTransactions,
+  createTransaction,
+  updateTransaction,
+  deleteTransaction,
+} from "./services/transactionService";
 
 function App() {
   const [transactions, setTransactions] = useState([]);
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
+  const [editingId, setEditingId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Fetch all transactions
-  const fetchTransactions = () => {
-    fetch("http://localhost:5000/transactions")
-      .then((response) => response.json())
-      .then((data) => setTransactions(data))
-      .catch((error) => console.error(error));
-  };
+ const fetchTransactions = async () => {
+  try {
+    const data = await getTransactions();
+    setTransactions(data);
+  } catch (error) {
+    console.error(error);
+  }
+ };
 
   useEffect(() => {
     fetchTransactions();
   }, []);
 
   // Save transaction
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!product || quantity <= 0 || price <= 0) {
-     alert("Please enter valid product, quantity and price.");
-    return;}
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const newTransaction = {
-      product,
-      quantity: Number(quantity),
-      price: Number(price),
-    };
+  if (!product || quantity <= 0 || price <= 0) {
+    alert("Please enter valid product, quantity and price.");
+    return;
+  }
 
-    try {
-      const response = await fetch("http://localhost:5000/transactions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTransaction),
-      });
+  const newTransaction = {
+    product,
+    quantity: Number(quantity),
+    price: Number(price),
+  };
 
-      const data = await response.json();
+  try {
+    let data;
 
-      alert(data.message);
+    if (editingId) {
+      data = await updateTransaction(editingId, newTransaction);
+    } else {
+      data = await createTransaction(newTransaction);
+    }
 
-      setProduct("");
-      setQuantity("");
-      setPrice("");
+    alert(data.message);
 
-      fetchTransactions();
+    setProduct("");
+    setQuantity("");
+    setPrice("");
+    setEditingId(null);
+
+    fetchTransactions();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+  const handleDelete = async (id) => {
+   const confirmDelete = window.confirm(
+      "Are you sure you want to delete this transaction?"
+    );
+
+    if (!confirmDelete) return;
+
+   try {
+    const response = await fetch(
+      `http://localhost:5000/transactions/${id}`,
+      {
+        method: "DELETE",
+      }
+     );
+
+     const data = await response.json();
+
+     alert(data.message);
+
+     fetchTransactions();
     } catch (error) {
-      console.error(error);
+     console.error(error);
     }
   };
 
+  const handleEdit = (transaction) => {
+    setEditingId(transaction.id);
+    setProduct(transaction.product);
+    setQuantity(transaction.quantity);
+    setPrice(transaction.price);
+  };
+ 
+
+  const filteredTransactions = transactions.filter((transaction) =>
+    transaction.product.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  console.log("Search:", searchTerm);
+  console.log("Filtered:", filteredTransactions);
+
+  const totalTransactions = transactions.length;
+
+ const totalRevenue = transactions.reduce(
+   (sum, transaction) => sum + Number(transaction.total),
+   0
+ );
+
+ const totalQuantity = transactions.reduce(
+   (sum, transaction) => sum + Number(transaction.quantity),
+    0
+ );
+
+ 
+
   return (
-    <div style={{ padding: "30px", maxWidth: "700px", margin: "auto" }}>
-      <h1>POS Transaction Web App</h1>
+   
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Product"
-          value={product}
-          onChange={(e) => setProduct(e.target.value)}
-        />
+    <div
+    style={{
+    minHeight: "100vh",
+    backgroundColor: "#f4f7fc",
+    padding: "40px",
+    }} >
+   <div
+      style={{
+        maxWidth: "1000px",
+        margin: "0 auto",
+        backgroundColor: "#fff",
+        padding: "30px",
+        borderRadius: "15px",
+        boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+      }}>
+      <h1
+        style={{
+          textAlign: "center",
+          color: "#0d6efd",
+          marginBottom: "30px",
+          fontSize: "36px",
+        }}>
+       🛒 POS Transaction Dashboard
+      </h1>
+           
+      <DashboardCards
+       totalTransactions={totalTransactions}
+       totalRevenue={totalRevenue}
+       totalQuantity={totalQuantity}
+      />
 
-        <br />
-        <br />
+     
+      <SearchBar
+        searchTerm={searchTerm}
+       setSearchTerm={setSearchTerm}
+      />
 
-        <input
-          type="number"
-          placeholder="Quantity"
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-        />
-
-        <br />
-        <br />
-
-        <input
-          type="number"
-          placeholder="Price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-
-        <br />
-        <br />
-
-        <button type="submit">Save Transaction</button>
-      </form>
+      <TransactionForm
+        product={product}
+        setProduct={setProduct}
+        quantity={quantity}
+        setQuantity={setQuantity}
+        price={price}
+        setPrice={setPrice}
+        editingId={editingId}
+        handleSubmit={handleSubmit}
+      />
+    
 
       <hr />
 
       <h2>Transactions</h2>
 
-      <table border="1" cellPadding="10" width="100%">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
-          </tr>
-        </thead>
+     <TransactionTable
+        transactions={filteredTransactions}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+     />
 
-        <tbody>
-          {transactions.map((transaction) => (
-            <tr key={transaction.id}>
-              <td>{transaction.product}</td>
-              <td>{transaction.quantity}</td>
-              <td>{transaction.price}</td>
-              <td>{transaction.total}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <hr />
+
+      <p
+      style={{
+        textAlign: "center",
+        color: "#6867",
+        marginTop: "30px",
+
+
+      }}>
+        POS Transcation Web App © 2026
+      </p>
+
     </div>
+   </div>
   );
 }
+
 
 export default App;
