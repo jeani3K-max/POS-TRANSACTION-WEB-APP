@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./db");
 const transactionRoutes = require("./routes/transactions");
+const authRoutes = require("./routes/auth");
 
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/transactions", transactionRoutes);
+app.use("/auth", authRoutes);
 
 // Test Route
 app.get("/", (req, res) => {

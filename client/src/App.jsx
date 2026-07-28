@@ -3,6 +3,8 @@ import DashboardCards from "./components/DashboardCards";
 import SearchBar from "./components/SearchBar";
 import TransactionForm from "./components/TransactionForm";
 import TransactionTable from "./components/TransactionTable";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 import {
   getTransactions,
@@ -18,6 +20,11 @@ function App() {
   const [price, setPrice] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState("login");
+
+ const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("token")
+  );
 
   // Fetch all transactions
  const fetchTransactions = async () => {
@@ -122,12 +129,34 @@ function App() {
     0
  );
 
+ const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    setIsAuthenticated(false);
+    setPage("login");
+  };
+  if (!isAuthenticated) {
+      if (page === "register") {
+        return (
+          <Register
+            onLoginClick={() => setPage("login")}
+         />
+       );
+      }
+
+      return (
+       <Login
+         onRegisterClick={() => setPage("register")}
+         onLoginSuccess={() => setIsAuthenticated(true)}
+       />
+     );
+    }
+
  
 
   return (
-   
-
-    <div
+   <div
     style={{
     minHeight: "100vh",
     backgroundColor: "#f4f7fc",
@@ -151,6 +180,21 @@ function App() {
         }}>
        🛒 POS Transaction Dashboard
       </h1>
+
+      <div style={{ textAlign: "right", marginBottom: "20px" }}>
+        <button
+          onClick={handleLogout}
+          style={{
+            backgroundColor: "#dc3545",
+            color: "#fff",
+            border: "none",
+            padding: "10px 18px",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}>
+          Logout
+       </button>
+     </div>
            
       <DashboardCards
        totalTransactions={totalTransactions}
