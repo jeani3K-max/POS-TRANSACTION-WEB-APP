@@ -20,6 +20,7 @@ export default function TransactionTable({
         <tr>
           <th style={{ padding: "12px" }}>Product</th>
           <th style={{ padding: "12px" }}>Quantity</th>
+          <th style={{ padding: "12px" }}>Unit</th>
           <th style={{ padding: "12px" }}>Price</th>
           <th style={{ padding: "12px" }}>Total</th>
           <th style={{ padding: "12px" }}>Date</th>
@@ -31,7 +32,7 @@ export default function TransactionTable({
         {transactions.length === 0 ? (
           <tr>
             <td
-              colSpan="6"
+              colSpan="7"
               style={{
                 textAlign: "center",
                 padding: "20px",
@@ -46,6 +47,8 @@ export default function TransactionTable({
               <td style={cellStyle}>{transaction.product}</td>
 
               <td style={cellStyle}>{transaction.quantity}</td>
+
+              <td style={cellStyle}>{transaction.unit}</td>
 
               <td style={cellStyle}>₦{transaction.price}</td>
 

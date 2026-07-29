@@ -3,6 +3,8 @@ export default function TransactionForm({
   setProduct,
   quantity,
   setQuantity,
+  unit,
+  setUnit,
   price,
   setPrice,
   editingId,
@@ -46,6 +48,28 @@ export default function TransactionForm({
           fontSize: "16px",
           boxSizing: "border-box",}}
       />
+      <select
+        value={unit}
+        onChange={(e) => setUnit(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "12px",
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          fontSize: "16px",
+          boxSizing: "border-box",
+        }}>
+       <option value="Piece">Piece</option>
+       <option value="Pack">Pack</option>
+       <option value="Box">Box</option>
+       <option value="Carton">Carton</option>
+       <option value="Bottle">Bottle</option>
+       <option value="Strip">Strip</option>
+       <option value="Sachet">Sachet</option>
+       <option value="Tube">Tube</option>
+       <option value="Roll">Roll</option>
+       <option value="Dozen">Dozen</option>
+     </select>
 
       <input
         type="number"

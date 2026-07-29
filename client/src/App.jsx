@@ -17,6 +17,7 @@ function App() {
   const [transactions, setTransactions] = useState([]);
   const [product, setProduct] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [unit, setUnit] = useState("Piece");
   const [price, setPrice] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,7 +45,7 @@ function App() {
  const handleSubmit = async (e) => {
   e.preventDefault();
 
-  if (!product || quantity <= 0 || price <= 0) {
+  if (!product || quantity <= 0 || !unit || price <= 0) {
     alert("Please enter valid product, quantity and price.");
     return;
   }
@@ -52,6 +53,7 @@ function App() {
   const newTransaction = {
     product,
     quantity: Number(quantity),
+    unit,
     price: Number(price),
   };
 
@@ -68,6 +70,7 @@ function App() {
 
     setProduct("");
     setQuantity("");
+    setUnit("Piece");
     setPrice("");
     setEditingId(null);
 
@@ -106,6 +109,7 @@ function App() {
     setEditingId(transaction.id);
     setProduct(transaction.product);
     setQuantity(transaction.quantity);
+    setUnit(transaction.unit);
     setPrice(transaction.price);
   };
  
@@ -213,6 +217,8 @@ function App() {
         setProduct={setProduct}
         quantity={quantity}
         setQuantity={setQuantity}
+        unit={unit}
+        setUnit={setUnit}
         price={price}
         setPrice={setPrice}
         editingId={editingId}

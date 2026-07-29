@@ -4,29 +4,42 @@ const db = require("../db");
 
 // GET all transactions
 router.get("/", (req, res) => {
-  db.all("SELECT * FROM transactions ORDER BY id DESC", [], (err, rows) => {
-    console.log(rows); // Add this line
+  db.all(
+  `
+    SELECT
+      id,
+      product,
+      quantity,
+      unit,
+      price,
+      total,
+      created_at AS createdAt
+      FROM transactions
+      ORDER BY id DESC
+   `,
+   [],
+   (err, rows) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
 
-    if (err) {
-      return res.status(500).json({ error: err.message });
+      res.json(rows);
     }
-
-    res.json(rows);
-  });
+  );
 });
 
 // POST a new transaction
 router.post("/", (req, res) => {
-  const { product, quantity, price } = req.body;
+  const { product, quantity, unit, price } = req.body;
 
   const total = quantity * price;
 
   const sql = `
-    INSERT INTO transactions (product, quantity, price, total)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO transactions (product, quantity, unit, price, total)
+    VALUES (?, ?, ?, ?, ?)
   `;
 
-  db.run(sql, [product, quantity, price, total], function (err) {
+  db.run(sql, [product, quantity, unit, price, total], function (err) {
     if (err) {
       return res.status(500).json({
         error: err.message,
@@ -70,17 +83,17 @@ router.delete("/:id", (req, res) => {
 // UPDATE a transaction
 router.put("/:id", (req, res) => {
   const { id } = req.params;
-  const { product, quantity, price } = req.body;
+  const { product, quantity, unit, price } = req.body;
 
   const total = quantity * price;
 
   const sql = `
     UPDATE transactions
-    SET product = ?, quantity = ?, price = ?, total = ?
+    SET product = ?, quantity = ?, unit = ?, price = ?, total = ?
     WHERE id = ?
   `;
 
-  db.run(sql, [product, quantity, price, total, id], function (err) {
+  db.run(sql, [product, quantity, unit, price, total, id], function (err) {
     if (err) {
       return res.status(500).json({
         error: err.message,

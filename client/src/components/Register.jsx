@@ -21,55 +21,148 @@ export default function Register({ onLoginClick }) {
       setName("");
       setEmail("");
       setPassword("");
+
+      // Return to login page after successful registration
+      onLoginClick();
     }
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "40px auto" }}>
-      <h2>Register</h2>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "linear-gradient(135deg, #0d6efd, #6ea8fe)",
+      }}
+    >
+      <div
+        style={{
+          width: "380px",
+          background: "#fff",
+          padding: "35px",
+          borderRadius: "15px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            color: "#0d6efd",
+            marginBottom: "10px",
+          }}
+        >
+          🛒 POS System
+        </h1>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+        <p
+          style={{
+            textAlign: "center",
+            color: "#666",
+            marginBottom: "30px",
+          }}
+        >
+          Create your account
+        </p>
 
-        <br /><br />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            style={{
+              width: "100%",
+              padding: "12px",
+              marginBottom: "15px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+              fontSize: "16px",
+              boxSizing: "border-box",
+            }}
+          />
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={{
+              width: "100%",
+              padding: "12px",
+              marginBottom: "15px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+              fontSize: "16px",
+              boxSizing: "border-box",
+            }}
+          />
 
-        <br /><br />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={{
+              width: "100%",
+              padding: "12px",
+              marginBottom: "20px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+              fontSize: "16px",
+              boxSizing: "border-box",
+            }}
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <button
+            type="submit"
+            style={{
+              width: "100%",
+              padding: "12px",
+              backgroundColor: "#198754",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "16px",
+              cursor: "pointer",
+              fontWeight: "bold",
+            }}
+          >
+            Register
+          </button>
+        </form>
 
-        <br /><br />
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "20px",
+            color: "#555",
+          }}
+        >
+          Already have an account?
+        </p>
 
-        <button type="submit">
-          Register
-        </button>
-      </form>
-
-      <p>
-        Already have an account?{" "}
-        <button onClick={onLoginClick}>
+        <button
+          onClick={onLoginClick}
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginTop: "10px",
+            backgroundColor: "#0d6efd",
+            color: "#fff",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontWeight: "bold",
+          }}
+        >
           Login
         </button>
-      </p>
+      </div>
     </div>
   );
 }
