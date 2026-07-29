@@ -4,107 +4,92 @@ export default function TransactionTable({
   handleDelete,
 }) {
   return (
-    <table
-      style={{
-        width: "100%",
-        borderCollapse: "collapse",
-        marginTop: "20px",
-      }}
-    >
-      <thead
-        style={{
-          backgroundColor: "#0d6efd",
-          color: "white",
-        }}
-      >
-        <tr>
-          <th style={{ padding: "12px" }}>Product</th>
-          <th style={{ padding: "12px" }}>Quantity</th>
-          <th style={{ padding: "12px" }}>Unit</th>
-          <th style={{ padding: "12px" }}>Price</th>
-          <th style={{ padding: "12px" }}>Total</th>
-          <th style={{ padding: "12px" }}>Date</th>
-          <th style={{ padding: "12px" }}>Actions</th>
-        </tr>
-      </thead>
+    <div className="overflow-x-auto">
+      <table className="w-full border-collapse">
 
-      <tbody>
-        {transactions.length === 0 ? (
-          <tr>
-            <td
-              colSpan="7"
-              style={{
-                textAlign: "center",
-                padding: "20px",
-              }}
-            >
-              No transactions found.
-            </td>
+        <thead>
+          <tr className="bg-blue-600 text-white">
+            <th className="px-4 py-3 text-center">Product</th>
+            <th className="px-4 py-3 text-center">Quantity</th>
+            <th className="px-4 py-3 text-center">Unit</th>
+            <th className="px-4 py-3 text-center">Price</th>
+            <th className="px-4 py-3 text-center">Total</th>
+            <th className="px-4 py-3 text-center">Date</th>
+            <th className="px-4 py-3 text-center">Actions</th>
           </tr>
-        ) : (
-          transactions.map((transaction) => (
-            <tr key={transaction.id}>
-              <td style={cellStyle}>{transaction.product}</td>
+        </thead>
 
-              <td style={cellStyle}>{transaction.quantity}</td>
-
-              <td style={cellStyle}>{transaction.unit}</td>
-
-              <td style={cellStyle}>₦{transaction.price}</td>
-
-              <td style={cellStyle}>₦{transaction.total}</td>
-
-             <td style={cellStyle}>
-                {transaction.createdAt
-                ? new Date(transaction.createdAt.replace(" ", "T") + "Z")
-                .toLocaleString("en-NG", {timeZone: "Africa/Lagos",})
-                : "N/A"}
-              </td>
-
-              <td style={cellStyle}>
-                <button
-                  onClick={() => handleEdit(transaction)}
-                  style={editButton}
-                >
-                  Edit
-                </button>
-
-                <button
-                  onClick={() => handleDelete(transaction.id)}
-                  style={deleteButton}
-                >
-                  Delete
-                </button>
+        <tbody>
+          {transactions.length === 0 ? (
+            <tr>
+              <td
+                colSpan="7"
+                className="py-8 text-center text-slate-500"
+              >
+                No transactions found.
               </td>
             </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+          ) : (
+            transactions.map((transaction) => (
+              <tr
+                key={transaction.id}
+                className="border-b hover:bg-slate-50 transition-colors"
+              >
+                <td className="px-4 py-3 text-center">
+                  {transaction.product}
+                </td>
+
+                <td className="px-4 py-3 text-center">
+                  {transaction.quantity}
+                </td>
+
+                <td className="px-4 py-3 text-center">
+                  {transaction.unit}
+                </td>
+
+                <td className="px-4 py-3 text-center">
+                  ₦{Number(transaction.price).toLocaleString()}
+                </td>
+
+                <td className="px-4 py-3 text-center font-semibold text-green-600">
+                  ₦{Number(transaction.total).toLocaleString()}
+                </td>
+
+                <td className="px-4 py-3 text-center">
+                  {transaction.createdAt
+                    ? new Date(
+                        transaction.createdAt.replace(" ", "T") + "Z"
+                      ).toLocaleString("en-NG", {
+                        timeZone: "Africa/Lagos",
+                      })
+                    : "N/A"}
+                </td>
+
+                <td className="px-4 py-3">
+                  <div className="flex justify-center gap-2">
+
+                    <button
+                      onClick={() => handleEdit(transaction)}
+                      className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg transition"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(transaction.id)}
+                      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
+                    >
+                      Delete
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+            ))
+          )}
+        </tbody>
+
+      </table>
+    </div>
   );
 }
-
-const cellStyle = {
-  padding: "12px",
-  borderBottom: "1px solid #ddd",
-  textAlign: "center",
-};
-
-const editButton = {
-  backgroundColor: "#ffc107",
-  color: "#000",
-  border: "none",
-  padding: "8px 12px",
-  borderRadius: "5px",
-  cursor: "pointer",
-  marginRight: "8px",
-};
-
-const deleteButton = {
-  backgroundColor: "#dc3545",
-  color: "#fff",
-  border: "none",
-  padding: "8px 12px",
-  borderRadius: "5px",
-  cursor: "pointer",
-};

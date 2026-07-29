@@ -1,4 +1,4 @@
-export default function TransactionForm({
+function TransactionForm({
   product,
   setProduct,
   quantity,
@@ -11,93 +11,99 @@ export default function TransactionForm({
   handleSubmit,
 }) {
   return (
-    <form
-      onSubmit={handleSubmit}
-        style={{
-          display: "grid",
-          gap: "15px",
-          marginBottom: "30px",
-          background: "rgba(255, 153, 153, 0.6)",
-          padding: "20px",
-          borderRadius: "10px",
-        }}>
-      <input
-        type="text"
-        placeholder="Product"
-        value={product}
-        onChange={(e) => setProduct(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "12px",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-          fontSize: "16px",
-          boxSizing: "border-box",
-        }}
-      />
+    <div className="bg-white rounded-2xl shadow-lg p-8">
+      <h2 className="text-2xl font-bold text-slate-700 mb-6">
+        {editingId ? "✏️ Edit Transaction" : "➕ Add New Transaction"}
+      </h2>
 
-      <input
-        type="number"
-        placeholder="Quantity"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-        style={{ width: "100%",
-          padding: "12px",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-          fontSize: "16px",
-          boxSizing: "border-box",}}
-      />
-      <select
-        value={unit}
-        onChange={(e) => setUnit(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "12px",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-          fontSize: "16px",
-          boxSizing: "border-box",
-        }}>
-       <option value="Piece">Piece</option>
-       <option value="Pack">Pack</option>
-       <option value="Box">Box</option>
-       <option value="Carton">Carton</option>
-       <option value="Bottle">Bottle</option>
-       <option value="Strip">Strip</option>
-       <option value="Sachet">Sachet</option>
-       <option value="Tube">Tube</option>
-       <option value="Roll">Roll</option>
-       <option value="Dozen">Dozen</option>
-     </select>
+      <form onSubmit={handleSubmit} className="space-y-6">
 
-      <input
-        type="number"
-        placeholder="Price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        style={{ width: "100%",
-          padding: "12px",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-          fontSize: "16px",
-          boxSizing: "border-box",}}
-      />
+        {/* Product */}
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-2">
+            Product
+          </label>
 
-      <button type="submit"
-      style={{
-            width: "100%",
-            padding: "14px",
-            backgroundColor: editingId ? "#ffc107" : "#0d6efd",
-            color: editingId ? "#000" : "#fff",
-            border: "none",
-            borderRadius: "8px",
-            fontSize: "16px",
-            cursor: "pointer",
-            fontWeight: "bold",
-          }}>
-        {editingId ? "Update Transaction" : "Save Transaction"}
-      </button>
-    </form>
+          <input
+            type="text"
+            placeholder="Enter product name"
+            value={product}
+            onChange={(e) => setProduct(e.target.value)}
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Quantity & Unit */}
+        <div className="grid md:grid-cols-2 gap-4">
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Quantity
+            </label>
+
+            <input
+              type="number"
+              placeholder="0"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">
+              Unit
+            </label>
+
+            <select
+              value={unit}
+              onChange={(e) => setUnit(e.target.value)}
+              className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option>Piece</option>
+              <option>Pack</option>
+              <option>Box</option>
+              <option>Bottle</option>
+              <option>Carton</option>
+              <option>Strip</option>
+              <option>Tube</option>
+              <option>Roll</option>
+              <option>Dozen</option>
+            </select>
+          </div>
+
+        </div>
+
+        {/* Price */}
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-2">
+            Price (₦)
+          </label>
+
+          <input
+            type="number"
+            placeholder="0.00"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Button */}
+        <button
+          type="submit"
+          className={`w-full py-3 rounded-xl text-white font-semibold transition ${
+            editingId
+              ? "bg-amber-500 hover:bg-amber-600"
+              : "bg-blue-600 hover:bg-blue-700"
+          }`}
+        >
+          {editingId ? "Update Transaction" : "Save Transaction"}
+        </button>
+
+      </form>
+    </div>
   );
 }
+
+export default TransactionForm;

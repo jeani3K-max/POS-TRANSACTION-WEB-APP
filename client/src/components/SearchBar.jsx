@@ -1,14 +1,23 @@
-export default function SearchBar({ searchTerm, setSearchTerm }) {
+function SearchBar({ searchTerm, setSearchTerm }) {
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div className="bg-white rounded-2xl shadow-lg p-6">
+      <label
+        htmlFor="search"
+        className="block text-lg font-semibold text-slate-700 mb-3"
+      >
+        🔍 Search Transactions
+      </label>
+
       <input
-       className="border-2 border-blue-500 rounded-lg p-3 w-full"
+        id="search"
         type="text"
-        placeholder="Search by product..."
+        placeholder="Search by product name..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        
+        className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-700 placeholder-slate-400 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition"
       />
     </div>
   );
 }
+
+export default SearchBar;

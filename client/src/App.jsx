@@ -27,6 +27,8 @@ function App() {
     !!localStorage.getItem("token")
   );
 
+  const [user, setUser] = useState(null);
+
   // Fetch all transactions
  const fetchTransactions = async () => {
   try {
@@ -37,9 +39,15 @@ function App() {
   }
  };
 
-  useEffect(() => {
+ useEffect(() => {
     fetchTransactions();
-  }, []);
+
+   const savedUser = localStorage.getItem("user");
+
+   if (savedUser) {
+     setUser(JSON.parse(savedUser));
+   }
+ }, []);
 
   // Save transaction
  const handleSubmit = async (e) => {
@@ -157,102 +165,97 @@ if (!isAuthenticated) {
   );
 }
 
- return (
-   <div
-     style={{
-       display: "flex",
-       justifyContent: "space-between",
-       alignItems: "center",
-       background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
-       color: "#fff",
-       padding: "25px 30px",
-       borderRadius: "15px",
-       marginBottom: "30px",
-     }}>
-     <div>
-        <h1
-         style={{
-           margin: 0,
-           fontSize: "32px",
-          }} >
-         🛒 POS Transaction System
-       </h1>
+ 
+  return (
+    <div className="min-h-screen bg-slate-100 py-10 px-5">
+      <div className="max-w-7xl mx-auto space-y-8">
 
-       <p
-         style={{
-           marginTop: "8px",
-           opacity: 0.9,
-         }} >
-         Manage sales efficiently and track business performance.
-       </p>
-     
+        {/* Header */}
+        <header className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl shadow-xl p-8 flex flex-col md:flex-row justify-between items-center gap-6">
 
-        <button
-         onClick={handleLogout}
-         style={{
-           background: "#ef4444",
-           color: "#fff",
-           border: "none",
-           padding: "12px 20px",
-           borderRadius: "8px",
-           cursor: "pointer",
-           fontWeight: "bold",
-           transition: "0.3s",
-          }}>
-         Logout
-        </button>
-   
+          <div>
+           <p className="text-blue-100 text-lg">
+              Welcome back 👋
+            </p>
 
+           <h1 className="text-4xl font-bold text-white mt-1">
+              {user?.name || "User"}
+           </h1>
+
+           <p className="text-blue-100 mt-2">
+             Manage sales efficiently and track business performance.
+           </p>
+         </div>
+
+          <div className="text-center md:text-right">
+
+            <p className="text-white mb-3">
+             Logged in as
+              <br />
+             <span className="font-semibold">
+               {user?.email}
+              </span>
+           </p>
+
+           <button
+             onClick={handleLogout}
+               className="bg-red-500 hover:bg-red-600 transition-all duration-300 px-6 py-3 rounded-xl text-white font-semibold shadow-lg"
+              >
+             Logout
+           </button>
+         </div>
+        </header>
+
+        {/* Dashboard Cards */}
        <DashboardCards
-         totalTransactions={totalTransactions}
-         totalRevenue={totalRevenue}
-         totalQuantity={totalQuantity}
+          totalTransactions={totalTransactions}
+          totalRevenue={totalRevenue}
+          totalQuantity={totalQuantity}
        />
 
-     
-       <SearchBar
+        {/* Search */}
+        <SearchBar
           searchTerm={searchTerm}
-         setSearchTerm={setSearchTerm}
+          setSearchTerm={setSearchTerm}
        />
 
-       <TransactionForm
-         product={product}
-         setProduct={setProduct}
-         quantity={quantity}
-         setQuantity={setQuantity}
-         unit={unit}
-         setUnit={setUnit}
-         price={price}
-         setPrice={setPrice}
-         editingId={editingId}
-         handleSubmit={handleSubmit}
-       />
-    
+       {/* Transaction Form */}
+        <TransactionForm
+          product={product}
+          setProduct={setProduct}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          unit={unit}
+          setUnit={setUnit}
+          price={price}
+          setPrice={setPrice}
+          editingId={editingId}
+          handleSubmit={handleSubmit}
+        />
 
-        <hr />
+       {/* Transactions */}
+       <div className="bg-white rounded-2xl shadow-lg p-6">
 
-       <h2>Transactions</h2>
+          <h2 className="text-2xl font-bold text-slate-700 mb-6">
+            📋 Recent Transactions
+         </h2>
 
-       <TransactionTable
-         transactions={filteredTransactions}
-         handleEdit={handleEdit}
-         handleDelete={handleDelete}
-       />
+         <TransactionTable
+           transactions={filteredTransactions}
+           handleEdit={handleEdit}
+           handleDelete={handleDelete}
+         />
+       </div>
 
-       <hr />
-
-       <p
-          style={{
-            textAlign: "center",
-           color: "#6867",
-           marginTop: "30px",
-         }}>
-         POS Transcation Web App © 2026
-       </p>
+        {/* Footer */}
+        <footer className="text-center text-slate-500 py-6">
+          Developed by <span className="font-semibold">Jeffrey Franklyn Amayanvbo</span>
+         <br />
+          POS Transaction Management System © 2026
+        </footer>
      </div>
-   </div> 
-   
-  );
+    </div>
+ );
 }
 
 
