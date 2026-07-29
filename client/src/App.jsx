@@ -140,117 +140,118 @@ function App() {
     setIsAuthenticated(false);
     setPage("login");
   };
-  if (!isAuthenticated) {
-      if (page === "register") {
-        return (
-          <Register
-            onLoginClick={() => setPage("login")}
-         />
-       );
-      }
-
-      return (
-       <Login
-         onRegisterClick={() => setPage("register")}
-         onLoginSuccess={() => setIsAuthenticated(true)}
-       />
-     );
-    }
-
- 
+if (!isAuthenticated) {
+  if (page === "register") {
+    return (
+      <Register
+        onLoginClick={() => setPage("login")}
+      />
+    );
+  }
 
   return (
-   <div
-    style={{
-    minHeight: "100vh",
-    backgroundColor: "#f4f7fc",
-    padding: "40px",
-    }} >
-   <div
-      style={{
-        maxWidth: "1000px",
-        margin: "0 auto",
-        backgroundColor: "#fff",
-        padding: "30px",
-        borderRadius: "15px",
-        boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-      }}>
-      <h1
-        style={{
-          textAlign: "center",
-          color: "#0d6efd",
-          marginBottom: "30px",
-          fontSize: "36px",
-        }}>
-       🛒 POS Transaction Dashboard
-      </h1>
+    <Login
+      onRegisterClick={() => setPage("register")}
+      onLoginSuccess={() => setIsAuthenticated(true)}
+    />
+  );
+}
 
-      <div style={{ textAlign: "right", marginBottom: "20px" }}>
+ return (
+   <div
+     style={{
+       display: "flex",
+       justifyContent: "space-between",
+       alignItems: "center",
+       background: "linear-gradient(135deg,#2563eb,#1d4ed8)",
+       color: "#fff",
+       padding: "25px 30px",
+       borderRadius: "15px",
+       marginBottom: "30px",
+     }}>
+     <div>
+        <h1
+         style={{
+           margin: 0,
+           fontSize: "32px",
+          }} >
+         🛒 POS Transaction System
+       </h1>
+
+       <p
+         style={{
+           marginTop: "8px",
+           opacity: 0.9,
+         }} >
+         Manage sales efficiently and track business performance.
+       </p>
+     
+
         <button
-          onClick={handleLogout}
-          style={{
-            backgroundColor: "#dc3545",
-            color: "#fff",
-            border: "none",
-            padding: "10px 18px",
-            borderRadius: "5px",
-            cursor: "pointer",
+         onClick={handleLogout}
+         style={{
+           background: "#ef4444",
+           color: "#fff",
+           border: "none",
+           padding: "12px 20px",
+           borderRadius: "8px",
+           cursor: "pointer",
+           fontWeight: "bold",
+           transition: "0.3s",
           }}>
-          Logout
-       </button>
-     </div>
-           
-      <DashboardCards
-       totalTransactions={totalTransactions}
-       totalRevenue={totalRevenue}
-       totalQuantity={totalQuantity}
-      />
+         Logout
+        </button>
+   
+
+       <DashboardCards
+         totalTransactions={totalTransactions}
+         totalRevenue={totalRevenue}
+         totalQuantity={totalQuantity}
+       />
 
      
-      <SearchBar
-        searchTerm={searchTerm}
-       setSearchTerm={setSearchTerm}
-      />
+       <SearchBar
+          searchTerm={searchTerm}
+         setSearchTerm={setSearchTerm}
+       />
 
-      <TransactionForm
-        product={product}
-        setProduct={setProduct}
-        quantity={quantity}
-        setQuantity={setQuantity}
-        unit={unit}
-        setUnit={setUnit}
-        price={price}
-        setPrice={setPrice}
-        editingId={editingId}
-        handleSubmit={handleSubmit}
-      />
+       <TransactionForm
+         product={product}
+         setProduct={setProduct}
+         quantity={quantity}
+         setQuantity={setQuantity}
+         unit={unit}
+         setUnit={setUnit}
+         price={price}
+         setPrice={setPrice}
+         editingId={editingId}
+         handleSubmit={handleSubmit}
+       />
     
 
-      <hr />
+        <hr />
 
-      <h2>Transactions</h2>
+       <h2>Transactions</h2>
 
-     <TransactionTable
-        transactions={filteredTransactions}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-     />
+       <TransactionTable
+         transactions={filteredTransactions}
+         handleEdit={handleEdit}
+         handleDelete={handleDelete}
+       />
 
-      <hr />
+       <hr />
 
-      <p
-      style={{
-        textAlign: "center",
-        color: "#6867",
-        marginTop: "30px",
-
-
-      }}>
-        POS Transcation Web App © 2026
-      </p>
-
-    </div>
-   </div>
+       <p
+          style={{
+            textAlign: "center",
+           color: "#6867",
+           marginTop: "30px",
+         }}>
+         POS Transcation Web App © 2026
+       </p>
+     </div>
+   </div> 
+   
   );
 }
 
