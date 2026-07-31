@@ -1,3 +1,6 @@
+<img width="960" height="540" alt="uppdated transaction" src="https://github.com/user-attachments/assets/b563695f-0bf9-4f10-8f2e-b2ed773e3f7a" />
+<img width="960" height="540" alt="Screenshot 2026-07-31 031926" src="https://github.com/user-attachments/assets/ee323d5c-4194-4b5c-a5c1-cbadbaf15f4f" />
+<img width="960" height="540" alt="Screenshot 2026-07-31 032350" src="https://github.com/user-attachments/assets/04705213-4f39-42e4-9b01-9d97326c150f" />
 # 🛒 POS Transaction Web App
 
 A full-stack Point of Sale (POS) Transaction Management System built with **React**, **Express.js**, **SQLite**, and **JWT Authentication**. The application allows users to securely register, log in, and manage POS transactions through an intuitive dashboard.
