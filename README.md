@@ -10,7 +10,7 @@ A full-stack Point of Sale (POS) Transaction Management System built with **Reac
 ## 🚀 Live Demo
 
 **Frontend (Vercel):**
-https://YOUR-VERCEL-URL.vercel.app
+https://[YOUR-VERCEL-URL.vercel.app](https://pos-transaction-web-app.vercel.app/)
 
 **Backend (Render):**
 https://pos-transaction-web-app.onrender.com
