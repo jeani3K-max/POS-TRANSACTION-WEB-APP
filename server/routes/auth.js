@@ -5,7 +5,7 @@ const db = require("../db"); // Use the same path you use in your transactions r
 
 const router = express.Router();
 
-const SECRET_KEY = "your_secret_key";
+const SECRET_KEY = process.env.JWT_SECRET;
 
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;

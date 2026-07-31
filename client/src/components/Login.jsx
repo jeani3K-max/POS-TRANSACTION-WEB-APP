@@ -19,7 +19,7 @@ export default function Login({ onRegisterClick, onLoginSuccess }) {
      console.log("Stored user:", result.user);
 
      alert("Login successful!");
-     onLoginSuccess();
+     onLoginSuccess(result.user);
     } else {
      alert(result.message);
     } 

@@ -158,10 +158,13 @@ if (!isAuthenticated) {
   }
 
   return (
-    <Login
-      onRegisterClick={() => setPage("register")}
-      onLoginSuccess={() => setIsAuthenticated(true)}
-    />
+   <Login
+     onRegisterClick={() => setPage("register")}
+     onLoginSuccess={(loggedInUser) => {
+       setIsAuthenticated(true);
+       setUser(loggedInUser);
+     }}
+   />
   );
 }
 
