@@ -6,20 +6,24 @@ export default function Login({ onRegisterClick, onLoginSuccess }) {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
     const result = await loginUser({ email, password });
 
-    if (result.token) {
+    console.log("Login response:", result);
+
+   if (result.token) {
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.user));
 
-      alert("Login successful!");
-      onLoginSuccess();
+     console.log("Stored user:", result.user);
+
+     alert("Login successful!");
+     onLoginSuccess();
     } else {
-      alert(result.message);
-    }
-  };
+     alert(result.message);
+    } 
+ };
 
   return (
     <div
