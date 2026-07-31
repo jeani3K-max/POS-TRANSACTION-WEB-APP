@@ -97,7 +97,7 @@ function App() {
 
    try {
     const response = await fetch(
-      `http://localhost:5000/transactions/${id}`,
+      `https://pos-transaction-web-app.onrender.com/transactions/${id}`,
       {
         method: "DELETE",
       }
