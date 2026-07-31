@@ -1,135 +1,260 @@
-POS Transaction Web App
+# 🛒 POS Transaction Web App
 
-Overview
+A full-stack Point of Sale (POS) Transaction Management System built with **React**, **Express.js**, **SQLite**, and **JWT Authentication**. The application allows users to securely register, log in, and manage POS transactions through an intuitive dashboard.
 
-The POS Transaction Web App is a full-stack web application built to help Point of Sale (POS) agents record and manage daily sales transactions digitally. It replaces manual record keeping with an easy-to-use interface for creating, updating, viewing, and deleting transactions while automatically calculating total sales.
+---
 
-⸻
+## 🚀 Live Demo
 
-Features
+**Frontend (Vercel):**
+https://YOUR-VERCEL-URL.vercel.app
 
-* User Registration
-* User Login Authentication
-* Add New Transaction
-* View All Transactions
-* Edit Existing Transactions
-* Delete Transactions
-* Search Transactions
-* Automatic Sales Total Calculation
-* Responsive Dashboard
+**Backend (Render):**
+https://pos-transaction-web-app.onrender.com
 
-⸻
+---
 
-Technologies Used
+## 📌 Features
 
-Frontend
+### Authentication
 
-* React
-* Vite
-* JavaScript
-* CSS
+- User Registration
+- Secure User Login
+- JWT Authentication
+- Protected Dashboard
+- Logout Functionality
 
-Backend
+### Transaction Management
 
-* Node.js
-* Express.js
+- Add new transactions
+- View all transactions
+- Edit existing transactions
+- Delete transactions
+- Search transactions
+- Automatic total amount calculation
 
-Database
+### Dashboard
 
-* SQLite3
+- Welcome message with logged-in user's name
+- Total transactions summary
+- Responsive layout
+- Modern UI with Tailwind CSS
+- Lucide React icons
 
-Other Packages
+---
 
-* CORS
-* Nodemon
+## 🛠️ Tech Stack
 
-⸻
+### Frontend
 
-Folder Structure
+- React
+- Vite
+- Tailwind CSS
+- JavaScript
+- Fetch API
+- Lucide React
 
+### Backend
+
+- Node.js
+- Express.js
+- SQLite3
+- JWT (JSON Web Token)
+- bcrypt
+
+### Deployment
+
+- Frontend: Vercel
+- Backend: Render
+
+---
+
+## 📂 Project Structure
+
+```
 POS-TRANSACTION-WEB-APP
 │
 ├── client/
 │   ├── src/
 │   ├── public/
-│   └── package.json
+│   ├── package.json
+│   └── vite.config.js
 │
 ├── server/
 │   ├── routes/
 │   ├── database/
+│   ├── db.js
 │   ├── index.js
 │   └── package.json
 │
 └── README.md
+```
 
-⸻
+---
 
-Installation
+## ⚙️ Installation
 
-Clone the repository
+### Clone the Repository
 
+```bash
 git clone https://github.com/jeani3K-max/POS-TRANSACTION-WEB-APP.git
+```
 
-Install frontend dependencies
+Move into the project folder
 
+```bash
+cd POS-TRANSACTION-WEB-APP
+```
+
+---
+
+## Backend Setup
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+Server runs on
+
+```
+http://localhost:5000
+```
+
+---
+
+## Frontend Setup
+
+Open another terminal
+
+```bash
 cd client
 npm install
-
-Start the frontend
-
 npm run dev
+```
 
-Install backend dependencies
+Frontend runs on
 
-cd ../server
-npm install
+```
+http://localhost:5173
+```
 
-Start the backend
+---
 
-npm run dev
+## Environment Variables
 
-⸻
+### Client (.env)
 
-API Endpoints
+```env
+VITE_API_URL=https://pos-transaction-web-app.onrender.com
+```
 
-Authentication
+### Server (.env)
 
-* POST /register
-* POST /login
+```env
+JWT_SECRET=your_secret_key
+PORT=5000
+```
 
-Transactions
+---
 
-* GET /transactions
-* POST /transactions
-* PUT /transactions/:id
-* DELETE /transactions/:id
+## API Endpoints
 
-⸻
+### Authentication
 
-Screenshots
+| Method | Endpoint       | Description       |
+| ------ | -------------- | ----------------- |
+| POST   | /auth/register | Register new user |
+| POST   | /auth/login    | Login user        |
 
-Add screenshots of:
+### Transactions
 
-* Login Page
-* Dashboard
-* Add Transaction Form
-* Transaction Table
+| Method | Endpoint          | Description          |
+| ------ | ----------------- | -------------------- |
+| GET    | /transactions     | Get all transactions |
+| POST   | /transactions     | Create transaction   |
+| PUT    | /transactions/:id | Update transaction   |
+| DELETE | /transactions/:id | Delete transaction   |
 
-⸻
+---
 
-Future Improvements
+## Screenshots
 
-* Export transactions to PDF
-* Export transactions to Excel
-* Monthly sales reports
-* Charts and analytics
-* User roles and permissions
+### Login Page
 
-⸻
+_Add screenshot here_
 
-Author
+### Dashboard
 
-Jeffrey Amayanvbo
+_Add screenshot here_
+
+### Transactions
+
+_Add screenshot here_
+
+---
+
+## Future Improvements
+
+- Transaction categories
+- Sales analytics
+- Export to Excel/PDF
+- Customer management
+- Inventory management
+- Dark mode
+- Role-based authentication
+- Pagination
+- Email verification
+
+---
+
+## Challenges Faced
+
+- SQLite database configuration
+- Backend deployment on Render
+- Connecting frontend to deployed backend
+- JWT authentication setup
+- Environment variable configuration
+- CRUD API integration
+
+---
+
+## Lessons Learned
+
+Through this project I learned how to:
+
+- Build a full-stack web application
+- Create REST APIs using Express.js
+- Connect React to a backend API
+- Implement JWT authentication
+- Hash passwords using bcrypt
+- Manage SQLite databases
+- Deploy applications using Render and Vercel
+- Handle environment variables
+- Perform CRUD operations
+
+---
+
+## Author
+
+**Jeffrey Amayanvbo**
 
 GitHub:
 https://github.com/jeani3K-max
+
+---
+
+## Repository
+
+https://github.com/jeani3K-max/POS-TRANSACTION-WEB-APP
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+⭐ If you found this project helpful, consider giving it a star on GitHub!
