@@ -256,7 +256,7 @@ https://github.com/jeani3K-max/POS-TRANSACTION-WEB-APP
 
 ## License
 
-This project is licensed under the MIT License.
+none.
 
 ---
 
