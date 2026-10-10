@@ -3,8 +3,20 @@
 <img width="960" height="540" alt="Screenshot 2026-07-31 032350" src="https://github.com/user-attachments/assets/04705213-4f39-42e4-9b01-9d97326c150f" />
 # 🛒 POS Transaction Web App
 
-A full-stack Point of Sale (POS) Transaction Management System built with **React**, **Express.js**, **SQLite**, and **JWT Authentication**. The application allows users to securely register, log in, and manage POS transactions through an intuitive dashboard.
+A full-stack Point of Sale (POS) Transaction Management System developed by Jeffrey Franklyn Amayanvbo to simplify sales recording and transaction management for small businesses.
 
+Built with React, Vite, Tailwind CSS, Node.js, Express.js, SQLite, and JWT-based authentication, the application provides a web interface for recording sales, calculating transaction totals, searching transaction records, and managing existing transactions.
+
+The project demonstrates practical experience in full-stack web development, REST API integration, database management, authentication, and cloud deployment.
+
+Live Demo
+
+* Frontend: https://pos-transaction-web-app.vercel.app
+* Backend: https://pos-transaction-web-app.onrender.com
+
+Project Status
+
+The application is a functional demonstration project. Further improvements may include inventory management, sales analytics, reporting, customer management, and enhanced access controls.
 ---
 
 ## 🚀 Live Demo
@@ -256,7 +268,13 @@ https://github.com/jeani3K-max/POS-TRANSACTION-WEB-APP
 
 ## License
 
-none.
+License
+
+Copyright © 2026 Jeffrey Amayanvbo. All rights reserved.
+
+Unless expressly authorized in writing by the copyright holder, no permission is granted to reproduce, distribute, modify, or commercially exploit this codebase.
+
+For licensing enquiries, please contact the copyright holder.
 
 ---
 
