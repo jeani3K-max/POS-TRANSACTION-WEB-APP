@@ -9,16 +9,6 @@ Built with React, Vite, Tailwind CSS, Node.js, Express.js, SQLite, and JWT-based
 
 The project demonstrates practical experience in full-stack web development, REST API integration, database management, authentication, and cloud deployment.
 
-Live Demo
-
-* Frontend: https://pos-transaction-web-app.vercel.app
-* Backend: https://pos-transaction-web-app.onrender.com
-
-Project Status
-
-The application is a functional demonstration project. Further improvements may include inventory management, sales analytics, reporting, customer management, and enhanced access controls.
----
-
 ## 🚀 Live Demo
 
 **Frontend (Vercel):**
@@ -26,6 +16,13 @@ https://pos-transaction-web-app.vercel.app
 
 **Backend (Render):**
 https://pos-transaction-web-app.onrender.com
+
+Project Status
+
+The application is a functional demonstration project. Further improvements may include inventory management, sales analytics, reporting, customer management, and enhanced access controls.
+---
+
+
 
 ---
 
